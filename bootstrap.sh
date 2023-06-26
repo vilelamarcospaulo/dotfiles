@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ./aux.sh
+
 # First thing to run on a new machine
 # Basic needed tools are installed here
 # (e.g. Homebrew, Git)
@@ -13,11 +15,7 @@ else
 fi
 
 # Install Git
-if ! command -v git &> /dev/null; then
-    # Install Git using Homebrew
-    brew install git
-else
-    echo "Git is already installed."
-fi
+check_and_install_command "git"
 
 bash yabai/bootstrap.sh
+
