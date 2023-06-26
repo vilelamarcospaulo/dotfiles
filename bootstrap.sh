@@ -20,3 +20,4 @@ else
     echo "Git is already installed."
 fi
 
+bash yabai/bootstrap.sh
