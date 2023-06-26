@@ -17,5 +17,8 @@ fi
 # Install Git
 check_and_install_command "git"
 
-bash yabai/bootstrap.sh
-
+modules=$(ls -d "$PWD"/*/)
+for module in $modules; do
+    echo "\nProcessing module: $module"
+    bash "$module"/bootstrap.sh
+done
