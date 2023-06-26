@@ -13,3 +13,14 @@ check_and_install_command() {
         echo "$command_name is already installed."
     fi
 }
+
+warning () {
+  local messages=("$@")
+  local red='\033[0;31m'
+  local reset='\033[0m'
+
+  echo -e "${red}WARNING:${reset}"
+  for message in "${messages[@]}"; do
+    echo -e "${red}${message}${reset}"
+  done
+}
