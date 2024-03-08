@@ -1,0 +1,4 @@
+[alias]
+  sync = "!git branch | grep -o 'main\\|master' | xargs -I % echo 'git checkout % && git pull origin %' | sh"
+  clear = "!git branch | egrep -v '(^\\*|master|main)' | xargs git branch -D"
+
