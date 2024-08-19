@@ -42,6 +42,10 @@ config.keys = {
     mods = 'CMD',
     action = wezterm.action.ToggleFullScreen,
   },
+  { key = "LeftArrow",  mods = "OPT", action = wezterm.action { SendString = "\x1bb" } },
+  { key = "RightArrow", mods = "OPT", action = wezterm.action { SendString = "\x1bf" } },
+  { key = "LeftArrow",  mods = "CMD", action = wezterm.action { SendString = "\x1bOH" } },
+  { key = "RightArrow", mods = "CMD", action = wezterm.action { SendString = "\x1bOF" } },
 }
 
 for i = 1, 8 do
