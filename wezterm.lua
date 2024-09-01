@@ -1,3 +1,5 @@
+local BACKGROUND_TITLE = '#101010'
+
 local wezterm = require 'wezterm'
 
 local act = wezterm.action
@@ -20,6 +22,13 @@ config.default_cursor_style = 'SteadyUnderline'
 config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
 config.window_close_confirmation = "NeverPrompt"
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0, }
+
+config.window_frame = {
+  active_titlebar_bg = BACKGROUND_TITLE,
+  font = require('wezterm').font 'Roboto Mono',
+  font_size = 13,
+  button_bg = BACKGROUND_TITLE,
+}
 
 config.keys = {
   {
@@ -65,21 +74,19 @@ end
 wezterm.on(
   'format-tab-title',
   function(tab, tabs, panes, _config, hover, max_width)
-    local background = '#333333'
+    local background = '#202020'
     local foreground = '#808080'
     local title = tab.active_pane.title
     title = '    ' .. title .. '    '
 
     if tab.is_active then
-      background = '#191919'
+      background = BACKGROUND_TITLE
       foreground = '#c0c0c0'
     end
 
 
     return {
-      { Attribute = { Intensity = "Bold" } },
       { Background = { Color = background } },
-      { Foreground = { Color = foreground } },
       { Text = title },
     }
   end
