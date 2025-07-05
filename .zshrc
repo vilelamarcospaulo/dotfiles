@@ -1,11 +1,3 @@
-if [ "$TERM_PROGRAM" != "WarpTerminal" ] 
-then
-  if [ -z "$TMUX" ] 
-  then
-    tmux new-session -A -s workspace
-  fi
-fi
-
 function set_title_precmd () {
   str=$(echo $PWD | sed 's/.*\///')
   echo -ne "\033]0;$str\007"
@@ -24,11 +16,17 @@ if [ -n "$ZSH_VERSION" ]; then
   preexec_functions+=(set_title_preexec)
 fi
 
-
-
 ####
 alias vi="nvim"
 alias vim="nvim"
 
+#### 
 alias cat="bat"
 export BAT_THEME="gruvbox-dark"
+
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+##
+source <(fzf --zsh)
