@@ -29,7 +29,7 @@ local function SetupAutoOrganizeImports(supportedActions, bufnr)
       result = result[1].result
       if not result then return end
 
-      edit = result[1].edit
+      local edit = result[1].edit
       vim.lsp.util.apply_workspace_edit(edit, 'utf-8')
     end
   })
@@ -43,10 +43,21 @@ local function LspClientSupportedActions(lsp_client_id)
   local actions = {}
   actions['document.formatting'] = lsp_client.server_capabilities.documentFormattingProvider
 
-  local codeActionsKinds = lsp_client and
+  local codeActionProvider = lsp_client and
       lsp_client.server_capabilities and
-      lsp_client.server_capabilities.codeActionProvider and
-      lsp_client.server_capabilities.codeActionProvider.codeActionKinds or {}
+      lsp_client.server_capabilities.codeActionProvider
+
+  if not codeActionProvider then
+    return actions
+  end
+
+  local codeActionsKinds = {}
+  if type(codeActionProvider) == "table" and
+      codeActionProvider.codeActionKinds then
+    codeActionsKinds = codeActionProvider.codeActionKinds --[[@as table]]
+  elseif type(codeActionProvider) == "boolean" then
+    codeActionsKinds = {} -- Empty table, no specific kinds specified
+  end
 
   -- index actions by key
   for _, v in pairs(codeActionsKinds) do
@@ -161,8 +172,16 @@ return {
         capabilities = capabilities,
       }
 
-      lspconfig.pyright.setup {
+      lspconfig.pylsp.setup {
         capabilities = capabilities,
+        settings = {
+          pylsp = {
+            plugins = {
+              black = { enabled = true },
+              isort = { enabled = true },
+            }
+          }
+        }
       }
 
       lspconfig.templ.setup {
