@@ -7,7 +7,7 @@ config.keys = {}
 config.audible_bell = 'Disabled'
 
 -- Font settings
-config.font_size = 15
+config.font_size = 16
 config.line_height = 1.2
 config.font = wezterm.font {
   family = 'JetBrains Mono',
@@ -85,6 +85,7 @@ config.inactive_pane_hsb = {
 -- window container config
 config.enable_scroll_bar = true
 config.window_decorations = 'RESIZE'
+config.window_background_opacity = 0.99
 config.window_padding = {
   left = 0,
   right = 0,
