@@ -10,6 +10,7 @@ local function my_on_attach(bufnr)
   vim.keymap.set("n", "<C-k>", api.node.show_info_popup, opts("Info"))
   vim.keymap.set("n", "<C-r>", api.fs.rename_sub, opts("Rename: Omit Filename"))
   vim.keymap.set("n", "<CR>", api.node.open.edit, opts("Open"))
+  vim.keymap.set("n", ".", api.tree.change_root_to_node, opts("Change Root To Node"))
   vim.keymap.set("n", ">", api.node.navigate.sibling.next, opts("Next Sibling"))
   vim.keymap.set("n", "<", api.node.navigate.sibling.prev, opts("Previous Sibling"))
   vim.keymap.set("n", "a", api.fs.create, opts("Create File Or Directory"))
@@ -98,7 +99,7 @@ return {
       },
       update_focused_file = {
         enable = true,
-        update_root = true
+        update_root = false,
       },
     })
   end,

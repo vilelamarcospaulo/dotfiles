@@ -199,8 +199,8 @@ return {
       vim.diagnostic.config({ virtual_lines = true })
 
       vim.keymap.set('n', '<space>d', vim.diagnostic.open_float)
-      vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-      vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+      vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1, float = true }) end)
+      vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1, float = true }) end)
       vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
       vim.api.nvim_create_autocmd('LspAttach', {
