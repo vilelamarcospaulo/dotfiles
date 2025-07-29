@@ -19,8 +19,7 @@ config.font = wezterm.font {
 -- config.color_scheme = 'Mocha (base16)'
 -- config.color_scheme = 'Nightfly (Gogh)'
 -- config.color_scheme = 'nightfox'
-config.color_scheme = 'Gruber (base16)'
--- config.color_scheme = 'Gruvbox Dark (Gogh)'
+config.color_scheme = 'Gruber (base16)' -- config.color_scheme = 'Gruvbox Dark (Gogh)'
 -- config.color_scheme = 'Gruvbox dark, medium (base16)'
 -- config.color_scheme = 'Gruvbox dark, pale (base16)'
 config.color_scheme = 'Guezwhoz'
@@ -67,15 +66,28 @@ config.colors = {
 
 -- panes
 config.keys = {
-  { key = '\\', mods = 'CMD',     action = wezterm.action.SplitPane { direction = 'Right' } },
-  { key = '\\', mods = 'CMD|ALT', action = wezterm.action.SplitPane { direction = 'Down' } },
-  { key = 'w',  mods = 'CMD',     action = wezterm.action.CloseCurrentPane { confirm = false }, },
+  { key = '\\',         mods = 'CMD',     action = wezterm.action.SplitPane { direction = 'Right' } },
+  { key = '\\',         mods = 'CMD|ALT', action = wezterm.action.SplitPane { direction = 'Down' } },
+  { key = 'w',          mods = 'CMD',     action = wezterm.action.CloseCurrentPane { confirm = false }, },
+
+  -- CMD+Right to End
+  { key = 'RightArrow', mods = 'CMD',     action = wezterm.action.SendKey { key = 'End' } },
+  -- ALT+RightArrow to move right by word
+  { key = 'RightArrow', mods = 'ALT',     action = wezterm.action.SendString '\x1bf' },
+
+  -- CMD+Left to Home
+  { key = 'LeftArrow',  mods = 'CMD',     action = wezterm.action.SendKey { key = 'Home' } },
+  -- ALT+LeftArrow to move left by word
+  { key = 'LeftArrow',  mods = 'ALT',     action = wezterm.action.SendString '\x1bb' },
+
+  -- CMD+Backspace to erase entire line (Ctrl+U)
+  { key = 'Backspace',  mods = 'CMD',     action = wezterm.action.SendString '\x15', },
 
   -- Pane navigation with vim-style keys (CTRL+h/j/k/l)
-  { key = 'h',  mods = 'CTRL',    action = wezterm.action.ActivatePaneDirection 'Left' },
-  { key = 'j',  mods = 'CTRL',    action = wezterm.action.ActivatePaneDirection 'Down' },
-  { key = 'k',  mods = 'CTRL',    action = wezterm.action.ActivatePaneDirection 'Up' },
-  { key = 'l',  mods = 'CTRL',    action = wezterm.action.ActivatePaneDirection 'Right' },
+  { key = 'h',          mods = 'CTRL',    action = wezterm.action.ActivatePaneDirection 'Left' },
+  { key = 'j',          mods = 'CTRL',    action = wezterm.action.ActivatePaneDirection 'Down' },
+  { key = 'k',          mods = 'CTRL',    action = wezterm.action.ActivatePaneDirection 'Up' },
+  { key = 'l',          mods = 'CTRL',    action = wezterm.action.ActivatePaneDirection 'Right' },
 }
 config.inactive_pane_hsb = {
   saturation = 0.9,
