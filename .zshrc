@@ -31,6 +31,5 @@ export BAT_THEME="gruvbox-dark"
 ##
 source <(fzf --zsh)
 
-
 ## atuin history
 eval "$(atuin init zsh --disable-up-arrow)"
