@@ -163,3 +163,6 @@ backspace = ['close-all-windows-but-current', 'mode main']
 if.app-id = 'com.github.wez.wezterm'
 run = "move-node-to-workspace W"
 
+[workspace-to-monitor-force-assignment]
+1 = 'main'                       # Main monitor
+9 = 'secondary'                  # Non-main monitor in case when there are only two monitors
