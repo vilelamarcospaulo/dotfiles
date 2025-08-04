@@ -15,5 +15,11 @@ return {
     { key = 'j',  mods = 'CTRL',    action = wezterm.action.ActivatePaneDirection 'Down' },
     { key = 'k',  mods = 'CTRL',    action = wezterm.action.ActivatePaneDirection 'Up' },
     { key = 'l',  mods = 'CTRL',    action = wezterm.action.ActivatePaneDirection 'Right' },
+
+    -- Pane resize
+    { key = '-',  mods = 'CMD',     action = wezterm.action.AdjustPaneSize { 'Left', 5 } },
+    { key = '=',  mods = 'CMD',     action = wezterm.action.AdjustPaneSize { 'Right', 5 } },
+    { key = '-',  mods = 'CMD|ALT', action = wezterm.action.AdjustPaneSize { 'Down', 5 } },
+    { key = '=',  mods = 'CMD|ALT', action = wezterm.action.AdjustPaneSize { 'Up', 5 } },
   }
 }
