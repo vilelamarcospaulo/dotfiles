@@ -60,7 +60,10 @@ return {
       },
       inactive_sections = {
         lualine_a = {},
-        lualine_b = {},
+        lualine_b = {
+          { 'filename', file_status = true, path = 1 }
+
+        },
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
@@ -69,9 +72,7 @@ return {
       tabline = {},
       winbar = {
         lualine_a = {},
-        lualine_b = {
-          { 'filename', file_status = false, path = 1 }
-        },
+        lualine_b = {},
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
@@ -79,9 +80,7 @@ return {
       },
       inactive_winbar = {
         lualine_a = {},
-        lualine_b = {
-          { 'filename', file_status = true, path = 1 }
-        },
+        lualine_b = {},
         lualine_z = {
         },
       },
