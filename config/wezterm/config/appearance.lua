@@ -76,9 +76,8 @@ end)
 
 local config = {
   color_scheme = 'Guezwhoz',
-  show_close_tab_button_in_tabs = false,
-  show_new_tab_button_in_tab_bar = false,
-  hide_tab_bar_if_only_one_tab = true,
+  -- show_new_tab_button_in_tab_bar = false,
+  -- hide_tab_bar_if_only_one_tab = true,
 
   use_fancy_tab_bar = false, -- Disable native separators
   tab_max_width = 100,
