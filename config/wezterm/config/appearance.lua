@@ -31,14 +31,13 @@ end
 wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
   local title = create_tab_title(tab, tabs, panes, config, hover, max_width)
 
-  local thin_right = utf8.char(0x2595) -- ▕ Thin vertical bar
+  local is_first_tab = tab.tab_index == 0
+  local is_last_tab = tab.tab_index == #tabs - 1
 
-  -- The filled in variant of the < symbol
   local SOLID_LEFT_ARROW = utf8.char(0xe0ba)
-  local SOLID_LEFT_MOST = utf8.char(0x2588)
-
-  -- The filled in variant of the > symbol
   local SOLID_RIGHT_ARROW = utf8.char(0xe0bc)
+
+  local THIN_VERTICAL = utf8.char(0x2595) -- ▕ Thin vertical bar
 
   local background = '#121212'
   local foreground = '#606060'
@@ -51,27 +50,33 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
   local edge_background = "#333333"
   local edge_foreground = background
 
-  return {
-    { Attribute = { Intensity = "Bold" } },
-    { Background = { Color = edge_background } },
-    { Foreground = { Color = edge_foreground } },
-    { Text = SOLID_LEFT_ARROW },
+  local tab_title = {}
+  if not is_first_tab then
+    table.insert(tab_title, { Attribute = { Intensity = "Bold" } })
+    table.insert(tab_title, { Background = { Color = edge_background } })
+    table.insert(tab_title, { Foreground = { Color = edge_foreground } })
+    table.insert(tab_title, { Text = SOLID_LEFT_ARROW })
+  end
 
-    { Attribute = { Intensity = 'Bold' } },
-    { Background = { Color = background } },
-    { Foreground = { Color = foreground } },
-    { Text = ' ' .. title.process },
+  table.insert(tab_title, { Attribute = { Intensity = 'Bold' } })
+  table.insert(tab_title, { Background = { Color = background } })
+  table.insert(tab_title, { Foreground = { Color = foreground } })
+  table.insert(tab_title, { Text = ' ' .. title.process })
 
-    { Foreground = { Color = foreground } },
-    { Text = (title.process ~= '' and title.path ~= '' and (' ' .. thin_right .. ' ') or '') },
-    { Attribute = { Intensity = 'Normal' } },
-    { Foreground = { Color = foreground } },
-    { Text = title.path .. ' ' },
+  table.insert(tab_title, { Foreground = { Color = foreground } })
+  table.insert(tab_title, { Text = (title.process ~= '' and title.path ~= '' and (' ' .. THIN_VERTICAL .. ' ') or '') })
+  table.insert(tab_title, { Attribute = { Intensity = 'Normal' } })
+  table.insert(tab_title, { Foreground = { Color = foreground } })
+  table.insert(tab_title, { Text = title.path .. ' ' })
 
-    { Background = { Color = edge_background } },
-    { Foreground = { Color = edge_foreground } },
-    { Text = SOLID_RIGHT_ARROW },
-  }
+  if not is_last_tab then
+    table.insert(tab_title, { Attribute = { Intensity = "Bold" } })
+    table.insert(tab_title, { Background = { Color = edge_background } })
+    table.insert(tab_title, { Foreground = { Color = edge_foreground } })
+    table.insert(tab_title, { Text = SOLID_RIGHT_ARROW })
+  end
+
+  return tab_title
 end)
 
 local config = {
