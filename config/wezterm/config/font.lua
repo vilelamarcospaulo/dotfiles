@@ -7,6 +7,6 @@ return {
     'FiraCode Nerd Font',
     'DejaVu Sans Mono',
   },
-  font_size         = 17,
+  font_size         = 15,
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 }
