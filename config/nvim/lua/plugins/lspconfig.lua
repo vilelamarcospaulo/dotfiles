@@ -227,7 +227,7 @@ return {
           vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
           vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
           vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-          vim.keymap.set({ 'n', 'v' }, '<leader>ca', fzf.lsp_code_actions, opts)
+          vim.keymap.set({ 'n', 'v' }, '<leader>a', fzf.lsp_code_actions, opts)
 
           local supportedActions = LspClientSupportedActions(lsp_client_id)
 
