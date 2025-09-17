@@ -1,6 +1,6 @@
 local fzf = require("fzf-lua")
 
-vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")
 
 vim.diagnostic.config({
   virtual_lines = {
@@ -40,8 +40,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
       vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'fuzzy', 'popup', 'preview' }
       vim.lsp.completion.enable(true, client.id, buffer, { autotrigger = true })
-
-      vim.keymap.set('i', '<C-b>', vim.lsp.completion.get)
     end
 
     -- format
