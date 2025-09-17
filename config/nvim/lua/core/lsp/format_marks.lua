@@ -1,12 +1,10 @@
-local M = {}
-
 -- RIGHT NOW, THIS IS A HACK.
 -- NEOVIM LSP removes all marks when formatting.
 -- This is a workaround to restore them.
 --
 -- TODO :: REMOVE THIS WHEN THE ISSUE IS FIXED.
--- TODO :: ISOLATE THE domain of the marks.
-function M.format_buffer(bufnr)
+return function(ev)
+  local bufnr = ev.buf
   local function valid_mark(mark)
     return mark:match("^'[a-zA-Z]$")
   end
@@ -72,5 +70,3 @@ function M.format_buffer(bufnr)
   set_marks(old_marks[1])
   set_marks(old_marks[2])
 end
-
-return M
