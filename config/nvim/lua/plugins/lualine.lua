@@ -1,3 +1,29 @@
+local theme = {
+  normal = {
+    a = { fg = '#AEAEAE', bg = '#242E32' },
+    b = { fg = '#AEAEAE', bg = '#242E32' },
+    c = { fg = '#AEAEAE', bg = '#101518' },
+  },
+
+  insert = {
+    a = { fg = "#FFA700", bg = '#101518' },
+    b = { fg = '#AEAEAE', bg = '#242E32' },
+    c = { fg = '#AEAEAE', bg = '#101518' },
+  },
+
+  visual = {
+    a = { fg = "#C678DD", bg = '#101518' },
+    b = { fg = '#AEAEAE', bg = '#242E32' },
+    c = { fg = '#AEAEAE', bg = '#101518' },
+  },
+
+  inactive = {
+    a = { bg = 'NONE', fg = '#5A5D61' },
+    b = { bg = 'NONE', fg = '#5A5D61' },
+    c = { bg = 'NONE', fg = '#5A5D61' },
+  },
+}
+
 return {
   'nvim-lualine/lualine.nvim',
   dependencies = {
@@ -8,9 +34,9 @@ return {
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        theme = 'nightly',
-        section_separators = { '' },
-        component_separators = { left = '│', right = '│' },
+        theme = theme,
+        section_separators = { '/' },
+        component_separators = { left = '', right = ' ' },
         disabled_filetypes = {
           statusline = {},
           winbar = {},
@@ -24,19 +50,32 @@ return {
         }
       },
       sections = {
-        lualine_a = { { 'fancy_mode', width = 10 } },
-        lualine_b = { { 'fancy_branch' }, { 'diff' } },
-        lualine_c = {
-          { 'filename', file_status = true, path = 1 }
+        lualine_a = {
+          { 'fancy_mode', width = 8 },
         },
+        lualine_b = {
+          { 'branch' },
+          { 'diff' },
+        },
+        lualine_c = {
+          { 'filename', file_status = true, path = 0 }
+        },
+
         lualine_x = {
           { 'fancy_macro' },
           { 'fancy_searchcount' },
-          { 'fancy_location' },
-        },
-        lualine_y = {
           {
-            "diagnostics",
+            function()
+              local clients = vim.lsp.get_clients({ bufnr = 0 })
+              if #clients == 0 then
+                return '[No LSP 󰓨]'
+              end
+
+              return '[' .. clients[1].name .. ' 󰓦]'
+            end,
+          },
+          {
+            'diagnostics',
             symbols = {
               error = ' E',
               warn = ' W',
@@ -44,44 +83,29 @@ return {
               hint = ' H',
             },
           },
-          {
-            function()
-              local clients = vim.lsp.get_clients({ bufnr = 0 })
-              if #clients == 0 then
-                return '[No LSP]'
-              end
-
-              return clients[1].name .. '  '
-            end,
-          },
           { 'fancy_filetype', ts_icon = '' }
         },
+        lualine_y = {},
         lualine_z = {}
       },
       inactive_sections = {
         lualine_a = {},
-        lualine_b = {
-          { 'filename', file_status = true, path = 1 }
-
-        },
+        lualine_b = {},
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
         lualine_z = {}
       },
-      tabline = {},
       winbar = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
+        lualine_c = {
+          { 'filename', file_status = true, path = 1 }
+        },
+        lualine_x = {
+        },
       },
       inactive_winbar = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_z = {
+        lualine_c = {
+          { 'filename', file_status = true, path = 1 }
         },
       },
       extensions = {}
