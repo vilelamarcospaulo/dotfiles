@@ -2,8 +2,6 @@ return {
   'kyazdani42/nvim-web-devicons',
   'ryanoasis/vim-devicons',
 
-  'nvim-treesitter/playground',
-
   'mbbill/undotree',
 
   'mg979/vim-visual-multi',
@@ -28,14 +26,10 @@ return {
     end,
     keys = {
       "ga",
-      { "ga.", "<cmd>TextCaseOpenTelescope<CR>", mode = { "n", "x" }, desc = "Telescope" },
+      { "ga.", "<cmd>TextCaseOpenTelescope<CR>", mode = { "n", "x" } },
     },
     cmd = {
-      "Subs",
       "TextCaseOpenTelescope",
-      "TextCaseOpenTelescopeQuickChange",
-      "TextCaseOpenTelescopeLSPChange",
-      "TextCaseStartReplacingCommand",
     },
   },
 }
