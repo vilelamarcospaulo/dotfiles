@@ -12,6 +12,15 @@ return {
           use_nvim_cmp_as_default = false,
           nerd_font_variant = "normal",
         },
+        cmdline = {
+          enabled = true,
+          sources = { 'cmdline' },
+          keymap = {
+            ['<Up>'] = { 'select_prev', 'fallback' },
+            ['<Down>'] = { 'select_next', 'fallback' },
+            ['<Tab>'] = { 'accept' },
+          }
+        },
         completion = {
           menu = {
             border = nil,
@@ -36,8 +45,9 @@ return {
             auto_show_delay_ms = 500,
           },
         },
-        signature = { enabled = true },
+
         keymap = { preset = 'enter' },
+        signature = { enabled = true },
       })
     end,
   },
