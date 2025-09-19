@@ -37,10 +37,7 @@ return {
         theme = theme,
         section_separators = { '/' },
         component_separators = { left = '', right = ' ' },
-        disabled_filetypes = {
-          statusline = {},
-          winbar = {},
-        },
+        disabled_filetypes = { 'NvimTree', 'NeogitStatus', 'gitcommit' },
         ignore_focus = {},
         always_divide_middle = true,
         globalstatus = false,
@@ -68,10 +65,10 @@ return {
             function()
               local clients = vim.lsp.get_clients({ bufnr = 0 })
               if #clients == 0 then
-                return '[No LSP 󰓨]'
+                return '[No LSP]'
               end
 
-              return '[' .. clients[1].name .. ' 󰓦]'
+              return '[' .. clients[1].name .. ']'
             end,
           },
           {
