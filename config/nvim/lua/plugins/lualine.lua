@@ -83,6 +83,7 @@ return {
               hint = ' H',
             },
           },
+          { 'location' },
           { 'fancy_filetype', ts_icon = '' }
         },
         lualine_y = {},
