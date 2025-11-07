@@ -7,6 +7,6 @@ return {
     -- 'FiraCode Nerd Font',
     -- 'Iosevka Nerd Font',
   },
-  font_size         = 18,
+  font_size         = 17,
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 }

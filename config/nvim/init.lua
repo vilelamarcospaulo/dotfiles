@@ -39,3 +39,11 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 
 vim.cmd 'colorscheme nightly'
 -- vim.cmd 'set termguicolors'
+
+-- Make matching parentheses more visible
+vim.api.nvim_set_hl(0, 'MatchParen', {
+  bg = '#4a4a4a',        -- Gray background
+  fg = '#ffffff',        -- White text
+  bold = true,           -- Make it bold
+  underline = true,      -- Add underline
+})
