@@ -4,8 +4,6 @@ return {
 
   'mbbill/undotree',
 
-  'mg979/vim-visual-multi',
-
   {
     'numToStr/Comment.nvim',
     config = function()
