@@ -129,7 +129,7 @@ return {
     end, vim.tbl_extend("force", opts, { desc = "Test: Debug nearest" }))
 
     -- UI controls
-    vim.keymap.set("n", "<leader>ts", function()
+    vim.keymap.set("n", "<leader>tt", function()
       neotest.summary.toggle()
     end, vim.tbl_extend("force", opts, { desc = "Test: Toggle summary" }))
 
