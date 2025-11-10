@@ -133,6 +133,12 @@ return {
           repeatable = false,
           mode = { "o", "v" },
         },
+        ["e"] = {
+          paredit.api.select_element,
+          "Element",
+          repeatable = false,
+          mode = { "o", "v" },
+        },
         ["ie"] = {
           paredit.api.select_element,
           "Element",
@@ -142,21 +148,23 @@ return {
       },
     })
 
-    -- Additional keybindings for common workflows
-    vim.keymap.set("n", "<localleader>w", function()
-      -- Wrap element in parentheses
-      require("nvim-paredit.api").wrap_element("(", ")")
-    end, { buffer = true, desc = "Wrap element in ()" })
+    -- Wrapping keybindings using mini.surround
+    -- Format: saie( = surround-add, inside-element, with (
+    vim.keymap.set("n", "<localleader>w", "saie)",
+      { desc = "Wrap element in ()", remap = true })
 
-    vim.keymap.set("n", "<localleader>[", function()
-      -- Wrap element in square brackets
-      require("nvim-paredit.api").wrap_element("[", "]")
-    end, { buffer = true, desc = "Wrap element in []" })
+    vim.keymap.set("n", "<localleader>[", "saie]",
+      { desc = "Wrap element in []", remap = true })
 
-    vim.keymap.set("n", "<localleader>{", function()
-      -- Wrap element in curly braces
-      require("nvim-paredit.api").wrap_element("{", "}")
-    end, { buffer = true, desc = "Wrap element in {}" })
+    vim.keymap.set("n", "<localleader>{", "saie}",
+      { desc = "Wrap element in {}", remap = true })
+
+    -- Note: You can also use standard mini.surround:
+    --   saie)  - Surround element with ()
+    --   saie]  - Surround element with []
+    --   saie}  - Surround element with {}
+    --   sd)    - Delete surrounding ()
+    --   sr)]   - Replace surrounding () with []
 
     -- Auto-command to apply paredit keybindings only in Lisp buffers
     vim.api.nvim_create_autocmd("FileType", {
