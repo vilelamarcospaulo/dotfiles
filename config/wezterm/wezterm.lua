@@ -1,5 +1,5 @@
 local Config = require('config')
-local wezterm = require 'wezterm'
+local wezterm = require('wezterm')
 
 return Config:init()
     :append({
