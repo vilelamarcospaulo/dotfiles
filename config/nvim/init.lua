@@ -3,9 +3,10 @@ require('core.lazy')
 require('core.lsp')
 require('core.clojure')
 
-vim.wo.number = true
--- vim.wo.relativenumber = true
-vim.wo.numberwidth = 5
+vim.opt.nu = true
+vim.opt.relativenumber = true
+vim.o.statuscolumn = "%s%=%{v:lnum}%{printf('%2x',v:relnum % 10)}%C  "
+
 vim.wo.signcolumn = "yes:2"
 vim.wo.cursorline = true
 
@@ -42,8 +43,8 @@ vim.cmd 'colorscheme nightly'
 
 -- Make matching parentheses more visible
 vim.api.nvim_set_hl(0, 'MatchParen', {
-  bg = '#4a4a4a',        -- Gray background
-  fg = '#ffffff',        -- White text
-  bold = true,           -- Make it bold
-  underline = true,      -- Add underline
+  bg = '#4a4a4a',   -- Gray background
+  fg = '#ffffff',   -- White text
+  bold = true,      -- Make it bold
+  underline = true, -- Add underline
 })
