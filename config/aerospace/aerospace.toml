@@ -161,4 +161,5 @@ backspace = ['close-all-windows-but-current', 'mode main']
 
 [workspace-to-monitor-force-assignment]
 1 = 'main'                       # Main monitor
+8 = 'secondary'                  # Non-main monitor in case when there are only two monitors
 9 = 'secondary'                  # Non-main monitor in case when there are only two monitors
