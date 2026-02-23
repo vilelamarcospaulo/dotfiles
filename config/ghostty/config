@@ -1,0 +1,73 @@
+# Ghostty config — migrated from WezTerm
+# Place at: ~/.config/ghostty/config
+
+# ─── macOS: Option/Alt key ───────────────────────────────────────────────────
+# Your WezTerm config composed characters with Option (e.g. ø, ©) but also
+# defined explicit escape sequences for alt+arrow word movement.
+# false = Option composes characters (macOS default behavior)
+# true  = Option sends ESC prefix (needed if you want alt as Meta globally)
+macos-icon = xray
+macos-option-as-alt = false
+macos-titlebar-style = tabs
+macos-titlebar-proxy-icon = hidden
+
+# ─── Font ────────────────────────────────────────────────────────────────────
+# Replace with values from your config/font.lua
+# font-family = MonoLisa
+font-size = 14
+# font-style = Regular
+# font-style-bold = Bold
+# font-style-italic = Italic
+
+# ─── Appearance ──────────────────────────────────────────────────────────────
+# window-padding-x = 4
+# window-padding-y = 1 
+background-opacity = 0.99
+
+# theme = Cursor Dark
+# theme = Kurokula
+theme = Gruvbox Material Dark 
+
+# ─── Key Bindings ────────────────────────────────────────────────────────────
+
+# Toggle fullscreen
+keybind = ctrl+cmd+f=toggle_fullscreen
+
+# Clear scrollback + viewport
+keybind = cmd+k=clear_screen
+
+# CMD+Backspace → erase entire line (Ctrl+U)
+keybind = cmd+backspace=text:\x15
+
+
+# ─── Font Management ────────────────────────────────────────────────────────
+keybind = ctrl+equal=increase_font_size:1
+keybind = ctrl+minus=decrease_font_size:1
+keybind = ctrl+zero=reset_font_size
+
+
+# ─── Pane / Split Management ─────────────────────────────────────────────────
+
+# CMD+\ → split right
+keybind = cmd+backslash=new_split:right
+
+# CMD+ALT+\ → split down
+keybind = cmd+shift+backslash=new_split:down
+
+# CMD+W → close pane
+keybind = cmd+w=close_surface
+
+# CMD+O → focus current split
+keybind = cmd+o=toggle_split_zoom
+
+# Pane navigation (vim-style, CTRL+h/j/k/l)
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+l=goto_split:right
+
+# Pane resize
+keybind = cmd+minus=resize_split:left,20
+keybind = cmd+equal=resize_split:right,20
+keybind = cmd+shift+minus=resize_split:down,20
+keybind = cmd+shift+equal=resize_split:up,20
