@@ -99,7 +99,10 @@ return {
       },
       update_focused_file = {
         enable = true,
-        update_root = false,
+        update_root = { -- nvim-tree v2 uses a nested table
+          enable = true,
+          ignore_list = {},
+        },
       },
     })
   end,

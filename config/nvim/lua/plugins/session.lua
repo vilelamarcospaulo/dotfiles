@@ -11,6 +11,7 @@ return {
   opts = {
     auto_restore = false,
     suppressed_dirs = { "~/", "~/Downloads", "/" },
+    post_restore_cmds = { "NvimTreeRefresh" },
     -- log_level = 'debug',
   },
 }
