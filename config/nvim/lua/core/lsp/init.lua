@@ -3,10 +3,8 @@ local fzf = require("fzf-lua")
 -- vim.lsp.set_log_level("debug")
 
 vim.diagnostic.config({
-  virtual_lines = {
-    current = true,
-  },
-  -- virtual_text = true,
+  virtual_lines = false,
+  virtual_text = true,
   underline = true,
   update_in_insert = false,
   severity_sort = true,

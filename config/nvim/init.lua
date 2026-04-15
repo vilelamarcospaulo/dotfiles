@@ -3,6 +3,8 @@ require('core.lazy')
 require('core.lsp')
 require('core.clojure')
 
+vim.o.showtabline = 0
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.o.statuscolumn = "%s%=%{v:lnum}%{printf('%2x',v:relnum % 10)}%C  "

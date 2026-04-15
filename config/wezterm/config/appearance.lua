@@ -98,5 +98,4 @@ local config = {
   },
 }
 
-
 return config

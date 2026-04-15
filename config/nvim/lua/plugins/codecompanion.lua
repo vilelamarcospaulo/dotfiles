@@ -22,7 +22,7 @@ return {
                 "openai_compatible",
                 {
                   env = {
-                    url = "https://ist-prod-litellm.nullmplatform.com",
+                    url = "LITELLM_URL",
                     api_key = "LITELLM_API_KEY",
                   },
                   schema = {

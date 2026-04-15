@@ -2,11 +2,14 @@ local wezterm = require 'wezterm'
 
 return {
   font              = wezterm.font_with_fallback {
+    'JetBrains Mono',
+    'JetBrains Mono NL', -- fallback
     'MesloLGL Nerd Font',
-    'Hack Nerd Font',
     -- 'FiraCode Nerd Font',
     -- 'Iosevka Nerd Font',
   },
-  font_size         = 17,
+  font_size         = 16,
+  line_height       = 1.1,
+  cell_width        = 0.9,
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 }
