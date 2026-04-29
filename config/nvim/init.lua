@@ -32,7 +32,7 @@ vim.opt.scrolloff = 8
 
 vim.opt.foldlevelstart = 20
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 -- bugfix for nvim-treesitter folding
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
