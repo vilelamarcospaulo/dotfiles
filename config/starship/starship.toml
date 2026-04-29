@@ -1,0 +1,48 @@
+add_newline = false
+format = "$time $directory( on $git_branch)($git_status)( $cmd_duration) $character"
+
+[character]
+success_symbol = "[\\$](dimmed white)"
+error_symbol = "[\\$](bold red)"
+
+[cmd_duration]
+format = "took [$duration]($style)"
+style = "bold yellow"
+min_time = 1
+
+[directory]
+truncation_length = 100
+truncate_to_repo = false
+style = "yellow"
+format = "[$path]($style)[$read_only]($read_only_style)"
+
+[fill]
+symbol = " "
+
+[java]
+disabled = true
+
+[git_branch]
+format = '[$symbol$branch(:$remote_branch)]($style)'
+style = 'bold cyan'
+symbol = "\uF126 "
+
+[git_status]
+format = '([$all_status$ahead_behind]($style))'
+style = "bold red"
+conflicted = " ⌽${count}"
+ahead = " ⇡${count}"
+behind = " ⇣${count}"
+diverged = " ⇕⇡${ahead_count}⇣${behind_count}"
+untracked = " ?${count}"
+stashed = " *${count}"
+modified = " ±${count}"
+staged = " +${count}"
+deleted = " ×${count}"
+renamed = " »${count}"
+
+[time]
+disabled = false
+format = "[$time]($style)"
+style = "dimmed white"
+
