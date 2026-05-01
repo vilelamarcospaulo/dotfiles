@@ -34,12 +34,6 @@ vim.opt.foldlevelstart = 20
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
--- bugfix for nvim-treesitter folding
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-  pattern = { "*" },
-  command = "normal zx",
-})
-
 vim.cmd 'colorscheme nightly'
 -- vim.cmd 'set termguicolors'
 
