@@ -88,7 +88,7 @@ local config = {
   tab_max_width = 100,
 
   enable_scroll_bar = true,
-  window_decorations = 'RESIZE',
+  window_decorations = 'RESIZE | MACOS_FORCE_SQUARE_CORNERS',
   window_background_opacity = 0.99,
   window_padding = {
     left = 0,
