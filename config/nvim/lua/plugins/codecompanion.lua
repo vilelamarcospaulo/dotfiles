@@ -38,8 +38,8 @@ return {
 
       })
 
-      vim.keymap.set({ "n" }, "<leader>aa", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
-      vim.keymap.set({ "v" }, "<leader>aa", ":'<,'>CodeCompanionChat ", { noremap = true, silent = false })
+      vim.keymap.set({ "n" }, "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+      vim.keymap.set({ "v" }, "<leader>cc", ":'<,'>CodeCompanionChat ", { noremap = true, silent = false })
     end,
   },
 }
