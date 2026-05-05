@@ -10,14 +10,6 @@ vim.keymap.set('n', '<leader>rr', ':%s//g<Left><Left>', { noremap = true, silent
 -- json formatter
 vim.keymap.set("n", "<localleader>jf", "<cmd>%!jq .<CR>", { desc = "format json" })
 
--- jump window
-vim.keymap.set("n", "<M-1>", "<cmd>wincmd 1 w<CR>", { desc = "jump to window 1" })
-vim.keymap.set("n", "<M-2>", "<cmd>wincmd 2 w<CR>", { desc = "jump to window 2" })
-vim.keymap.set("n", "<M-3>", "<cmd>wincmd 3 w<CR>", { desc = "jump to window 3" })
-vim.keymap.set("n", "<M-4>", "<cmd>wincmd 4 w<CR>", { desc = "jump to window 4" })
-vim.keymap.set("n", "<M-5>", "<cmd>wincmd 5 w<CR>", { desc = "jump to window 5" })
-vim.keymap.set("n", "<M-6>", "<cmd>wincmd 6 w<CR>", { desc = "jump to window 6" })
-
 -- Split window
 vim.keymap.set("n", "ss", "<cmd>split<CR>", { desc = "split horizontal" })
 vim.keymap.set("n", "sv", "<cmd>vsplit<CR>", { desc = "split vertical" })
@@ -35,6 +27,13 @@ vim.keymap.set("n", "=", [[<cmd>vertical resize +5<cr>]], { desc = "increase wid
 vim.keymap.set("n", "-", [[<cmd>vertical resize -5<cr>]], { desc = "decrease width" })
 vim.keymap.set("n", "+", [[<cmd>horizontal resize +2<cr>]], { desc = "increase height" })
 vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]], { desc = "decrease height" })
+
+-- Comment toggle (built-in gc operator, Neovim 0.10+)
+vim.keymap.del('v', 'gc')
+
+local comment_fn = require('vim._comment').operator
+vim.keymap.set({ 'n', 'v' }, 'gcc', comment_fn, { expr = true, desc = 'Toggle comment line' })
+vim.keymap.set({ 'n', 'v' }, '<C-/>', 'gcc', { desc = "comment line", remap = true })
 
 -- Save current buffer
 vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { desc = "save buffer" })
