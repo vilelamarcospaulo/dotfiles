@@ -7,7 +7,9 @@ return {
   {
     'numToStr/Comment.nvim',
     config = function()
-      require('Comment').setup()
+      require('Comment').setup({
+        mappings = { basic = false, extra = false }
+      })
 
       vim.keymap.set('n', '<C-/>', 'gcc', { desc = "comment line" })
       vim.keymap.set('v', '<C-/>', 'gc', { desc = "comment selection" })
