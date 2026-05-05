@@ -85,10 +85,10 @@ return {
       require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
     end, { desc = "prev function" })
 
-    vim.keymap.set({ "n", "x", "o" }, "gc", function()
+    vim.keymap.set({ "n", "x", "o" }, "gz", function()
       require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
     end, { desc = "next class" })
-    vim.keymap.set({ "n", "x", "o" }, "gC", function()
+    vim.keymap.set({ "n", "x", "o" }, "gZ", function()
       require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
     end, { desc = "prev class" })
 
