@@ -10,8 +10,8 @@ return {
       require('Comment').setup()
 
       local opts = {}
-      vim.api.nvim_set_keymap('n', '<C-/>', 'gcc', opts)
-      vim.api.nvim_set_keymap('v', '<C-/>', 'gc', opts)
+      vim.keymap.set('n', '<C-/>', 'gcc', opts)
+      vim.keymap.set('v', '<C-/>', 'gc', opts)
     end
   },
 
