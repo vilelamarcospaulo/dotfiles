@@ -19,12 +19,11 @@ return {
     "johmsalas/text-case.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
     config = function()
-      require("textcase").setup {}
+      require("textcase").setup { default_keymappings_enabled = false }
       require("telescope").load_extension("textcase")
     end,
     keys = {
-      "ga",
-      { "ga.", "<cmd>TextCaseOpenTelescope<CR>", mode = { "n", "x" } },
+      { "<localleader>cc", "<cmd>TextCaseOpenTelescope<CR>", mode = { "n", "x" }, desc = "change case" },
     },
     cmd = {
       "TextCaseOpenTelescope",

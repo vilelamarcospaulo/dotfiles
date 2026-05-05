@@ -62,20 +62,20 @@ return {
     vim.keymap.set({ "x", "o" }, "as", function()
       require "nvim-treesitter-textobjects.select".select_textobject("@local.scope", "locals")
     end, { desc = "select scope" })
-    vim.keymap.set({ "x", "o" }, "ap", function()
+    vim.keymap.set({ "x", "o" }, "aa", function()
       require "nvim-treesitter-textobjects.select".select_textobject("@parameter.outer", "textobjects")
-    end, { desc = "select around parameter" })
-    vim.keymap.set({ "x", "o" }, "ip", function()
+    end, { desc = "select around argument" })
+    vim.keymap.set({ "x", "o" }, "ia", function()
       require "nvim-treesitter-textobjects.select".select_textobject("@parameter.inner", "textobjects")
-    end, { desc = "select inner parameter" })
+    end, { desc = "select inner argument" })
 
     -- swaps
     vim.keymap.set("n", "<leader>a", function()
       require("nvim-treesitter-textobjects.swap").swap_next "@parameter.inner"
-    end, { desc = "swap next parameter" })
+    end, { desc = "swap next argument" })
     vim.keymap.set("n", "<leader>A", function()
       require("nvim-treesitter-textobjects.swap").swap_previous "@parameter.outer"
-    end, { desc = "swap prev parameter" })
+    end, { desc = "swap prev argument" })
 
     -- navigation
     vim.keymap.set({ "n", "x", "o" }, "gm", function()
@@ -92,12 +92,12 @@ return {
       require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
     end, { desc = "prev class" })
 
-    vim.keymap.set({ "n", "x", "o" }, "gp", function()
+    vim.keymap.set({ "n", "x", "o" }, "ga", function()
       require("nvim-treesitter-textobjects.move").goto_next_start("@parameter.outer", "textobjects")
-    end, { desc = "next parameter" })
-    vim.keymap.set({ "n", "x", "o" }, "gP", function()
+    end, { desc = "next argument" })
+    vim.keymap.set({ "n", "x", "o" }, "gA", function()
       require("nvim-treesitter-textobjects.move").goto_previous_start("@parameter.outer", "textobjects")
-    end, { desc = "prev parameter" })
+    end, { desc = "prev argument" })
 
     vim.keymap.set({ "n", "x", "o" }, "gl", function()
       require("nvim-treesitter-textobjects.move").goto_next_start("@assignment.lhs", "textobjects")
