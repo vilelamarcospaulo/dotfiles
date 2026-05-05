@@ -8,7 +8,7 @@ return {
   },
   lazy = false,                    -- neo-tree will lazily load itself
   config = function()
-    vim.keymap.set("n", "<leader>e", "<CMD>Neotree toggle<cr>")
+    vim.keymap.set("n", "<leader>e", "<CMD>Neotree toggle<cr>", { desc = "toggle file explorer" })
 
     require("neo-tree").setup({
       event_handlers = {

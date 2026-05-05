@@ -30,13 +30,13 @@ return {
     })
     -- fzf.register_ui_select()
 
-    vim.keymap.set('n', '<leader>ff', fzf.files)
-    vim.keymap.set('n', '<leader>fr', fzf.oldfiles)
+    vim.keymap.set('n', '<leader>ff', fzf.files, { desc = "find files" })
+    vim.keymap.set('n', '<leader>fr', fzf.oldfiles, { desc = "recent files" })
 
-    vim.keymap.set('n', '<leader>fw', fzf.live_grep)
-    vim.keymap.set('n', '<C-f>', fzf.live_grep)
+    vim.keymap.set('n', '<leader>fw', fzf.live_grep, { desc = "grep" })
+    vim.keymap.set('n', '<C-f>', fzf.live_grep, { desc = "grep" })
 
-    vim.keymap.set('n', '<leader>ht', fzf.colorschemes)
-    vim.keymap.set("n", "<leader>bb", fzf.buffers)
+    vim.keymap.set('n', '<leader>ht', fzf.colorschemes, { desc = "pick colorscheme" })
+    vim.keymap.set("n", "<leader>bb", fzf.buffers, { desc = "list buffers" })
   end
 }

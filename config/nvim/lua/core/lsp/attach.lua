@@ -24,24 +24,24 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- navigation
     local opts = { buffer = buffer }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'gr', fzf.lsp_references, opts)
-    vim.keymap.set('n', '<C-p>', fzf.lsp_live_workspace_symbols)
-    vim.keymap.set('n', 'gi', fzf.lsp_implementations, opts)
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = buffer, desc = "go to declaration" })
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = buffer, desc = "go to definition" })
+    vim.keymap.set('n', 'gr', fzf.lsp_references, { buffer = buffer, desc = "list references" })
+    vim.keymap.set('n', '<C-p>', fzf.lsp_live_workspace_symbols, { desc = "search workspace symbols" })
+    vim.keymap.set('n', 'gi', fzf.lsp_implementations, { buffer = buffer, desc = "list implementations" })
 
     -- modifiers
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set({ 'n', 'v' }, '<leader>ca', fzf.lsp_code_actions, opts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = buffer, desc = "rename symbol" })
+    vim.keymap.set({ 'n', 'v' }, '<leader>ca', fzf.lsp_code_actions, { buffer = buffer, desc = "code actions" })
 
     -- diagnostics
-    vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float)
-    vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1, float = true }) end)
-    vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1, float = true }) end)
-    vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+    vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = "show diagnostic" })
+    vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1, float = true }) end, { desc = "prev diagnostic" })
+    vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "next diagnostic" })
+    vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "diagnostics to loclist" })
 
     -- info
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = buffer, desc = "hover docs" })
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = buffer, desc = "signature help" })
   end,
 })

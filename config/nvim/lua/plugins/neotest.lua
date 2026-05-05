@@ -110,53 +110,53 @@ return {
     -- Run tests
     vim.keymap.set("n", "<localleader>tc", function()
       neotest.run.run()
-    end, vim.tbl_extend("force", opts, { desc = "Test: Run current" }))
+    end, vim.tbl_extend("force", opts, { desc = "test: run nearest" }))
 
     vim.keymap.set("n", "<localleader>tf", function()
       neotest.run.run(vim.fn.expand("%"))
-    end, vim.tbl_extend("force", opts, { desc = "Test: Run file" }))
+    end, vim.tbl_extend("force", opts, { desc = "test: run file" }))
 
     vim.keymap.set("n", "<localleader>ta", function()
       neotest.run.run(vim.fn.getcwd())
-    end, vim.tbl_extend("force", opts, { desc = "Test: Run all" }))
+    end, vim.tbl_extend("force", opts, { desc = "test: run all" }))
 
     vim.keymap.set("n", "<localleader>tl", function()
       neotest.run.run_last()
-    end, vim.tbl_extend("force", opts, { desc = "Test: Run last" }))
+    end, vim.tbl_extend("force", opts, { desc = "test: run last" }))
 
     vim.keymap.set("n", "<localleader>td", function()
       neotest.run.run({ strategy = "dap" })
-    end, vim.tbl_extend("force", opts, { desc = "Test: Debug nearest" }))
+    end, vim.tbl_extend("force", opts, { desc = "test: debug nearest" }))
 
     -- UI controls
     vim.keymap.set("n", "<localleader>tt", function()
       neotest.summary.toggle()
-    end, vim.tbl_extend("force", opts, { desc = "Test: Toggle summary" }))
+    end, vim.tbl_extend("force", opts, { desc = "test: toggle summary" }))
 
     vim.keymap.set("n", "<localleader>to", function()
       neotest.output.open({ enter = true, auto_close = true })
-    end, vim.tbl_extend("force", opts, { desc = "Test: Show output" }))
+    end, vim.tbl_extend("force", opts, { desc = "test: show output" }))
 
     vim.keymap.set("n", "<localleader>tO", function()
       neotest.output_panel.toggle()
-    end, vim.tbl_extend("force", opts, { desc = "Test: Toggle output panel" }))
+    end, vim.tbl_extend("force", opts, { desc = "test: toggle output panel" }))
 
     -- Navigation
     vim.keymap.set("n", "[t", function()
       neotest.jump.prev({ status = "failed" })
-    end, vim.tbl_extend("force", opts, { desc = "Test: Jump to prev failed" }))
+    end, vim.tbl_extend("force", opts, { desc = "test: prev failed" }))
 
     vim.keymap.set("n", "]t", function()
       neotest.jump.next({ status = "failed" })
-    end, vim.tbl_extend("force", opts, { desc = "Test: Jump to next failed" }))
+    end, vim.tbl_extend("force", opts, { desc = "test: next failed" }))
 
     -- Stop/Watch
     vim.keymap.set("n", "<localleader>tS", function()
       neotest.run.stop()
-    end, vim.tbl_extend("force", opts, { desc = "Test: Stop" }))
+    end, vim.tbl_extend("force", opts, { desc = "test: stop" }))
 
     vim.keymap.set("n", "<localleader>tw", function()
       neotest.watch.toggle()
-    end, vim.tbl_extend("force", opts, { desc = "Test: Toggle watch" }))
+    end, vim.tbl_extend("force", opts, { desc = "test: toggle watch" }))
   end,
 }

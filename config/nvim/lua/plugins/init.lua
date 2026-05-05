@@ -10,8 +10,8 @@ return {
       require('Comment').setup()
 
       local opts = {}
-      vim.keymap.set('n', '<C-/>', 'gcc', opts)
-      vim.keymap.set('v', '<C-/>', 'gc', opts)
+      vim.keymap.set('n', '<C-/>', 'gcc', { desc = "comment line" })
+      vim.keymap.set('v', '<C-/>', 'gc', { desc = "comment selection" })
     end
   },
 

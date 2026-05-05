@@ -151,13 +151,13 @@ return {
     -- Wrapping keybindings using mini.surround
     -- Format: saie( = surround-add, inside-element, with (
     vim.keymap.set("n", "<localleader>w", "saie)",
-      { desc = "Wrap element in ()", remap = true })
+      { desc = "wrap element in ()", remap = true })
 
     vim.keymap.set("n", "<localleader>[", "saie]",
-      { desc = "Wrap element in []", remap = true })
+      { desc = "wrap element in []", remap = true })
 
     vim.keymap.set("n", "<localleader>{", "saie}",
-      { desc = "Wrap element in {}", remap = true })
+      { desc = "wrap element in {}", remap = true })
 
     -- Note: You can also use standard mini.surround:
     --   saie)  - Surround element with ()

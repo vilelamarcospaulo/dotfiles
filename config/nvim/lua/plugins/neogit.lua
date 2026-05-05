@@ -12,7 +12,7 @@ return {
 
       vim.keymap.set("n", "<leader>gs", (function()
         return neogit.open()
-      end), { noremap = true })
+      end), { noremap = true, desc = "open git status" })
     end
   },
   { 'akinsho/git-conflict.nvim', version = "*", config = true },
@@ -45,7 +45,7 @@ return {
             else
               gitsigns.nav_hunk('next')
             end
-          end)
+          end, { desc = "next hunk" })
 
           map('n', '[c', function()
             if vim.wo.diff then
@@ -53,43 +53,43 @@ return {
             else
               gitsigns.nav_hunk('prev')
             end
-          end)
+          end, { desc = "prev hunk" })
 
           -- Actions
-          map('n', '<leader>hs', gitsigns.stage_hunk)
-          map('n', '<leader>hr', gitsigns.reset_hunk)
+          map('n', '<leader>hs', gitsigns.stage_hunk, { desc = "hunk: stage" })
+          map('n', '<leader>hr', gitsigns.reset_hunk, { desc = "hunk: reset" })
 
           map('v', '<leader>hs', function()
             gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-          end)
+          end, { desc = "hunk: stage selection" })
 
           map('v', '<leader>hr', function()
             gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-          end)
+          end, { desc = "hunk: reset selection" })
 
-          map('n', '<leader>hS', gitsigns.stage_buffer)
-          map('n', '<leader>hR', gitsigns.reset_buffer)
-          map('n', '<leader>hp', gitsigns.preview_hunk)
-          map('n', '<leader>hi', gitsigns.preview_hunk_inline)
+          map('n', '<leader>hS', gitsigns.stage_buffer, { desc = "hunk: stage buffer" })
+          map('n', '<leader>hR', gitsigns.reset_buffer, { desc = "hunk: reset buffer" })
+          map('n', '<leader>hp', gitsigns.preview_hunk, { desc = "hunk: preview" })
+          map('n', '<leader>hi', gitsigns.preview_hunk_inline, { desc = "hunk: preview inline" })
 
-          map('n', '<leader>hb', function() gitsigns.blame_line({ full = true }) end)
+          map('n', '<leader>hb', function() gitsigns.blame_line({ full = true }) end, { desc = "hunk: blame line" })
 
-          map('n', '<leader>hd', gitsigns.diffthis)
+          map('n', '<leader>hd', gitsigns.diffthis, { desc = "hunk: diff" })
 
           map('n', '<leader>hD', function()
             gitsigns.diffthis('~')
-          end)
+          end, { desc = "hunk: diff against last commit" })
 
-          map('n', '<leader>hQ', function() gitsigns.setqflist('all') end)
-          map('n', '<leader>hq', gitsigns.setqflist)
+          map('n', '<leader>hQ', function() gitsigns.setqflist('all') end, { desc = "hunk: all to quickfix" })
+          map('n', '<leader>hq', gitsigns.setqflist, { desc = "hunk: to quickfix" })
 
           -- Toggles
-          map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
-          map('n', '<leader>td', gitsigns.toggle_deleted)
-          map('n', '<leader>tw', gitsigns.toggle_word_diff)
+          map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = "toggle line blame" })
+          map('n', '<leader>td', gitsigns.toggle_deleted, { desc = "toggle deleted" })
+          map('n', '<leader>tw', gitsigns.toggle_word_diff, { desc = "toggle word diff" })
 
           -- Text object
-          map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+          map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = "select hunk" })
         end
       }
     end
@@ -103,10 +103,10 @@ return {
 
       vim.keymap.set('n', '<leader>gB',
         '<cmd>lua require"gitlinker".get_buf_range_url("n", {action_callback = require"gitlinker.actions".open_in_browser})<cr>',
-        { silent = true })
+        { silent = true, desc = "open line in browser" })
       vim.keymap.set('v', '<leader>gB',
         '<cmd>lua require"gitlinker".get_buf_range_url("v", {action_callback = require"gitlinker.actions".open_in_browser})<cr>',
-        {})
+        { desc = "open selection in browser" })
     end
   },
 }
