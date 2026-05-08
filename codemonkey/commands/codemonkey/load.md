@@ -27,7 +27,6 @@ Arguments: `$ARGUMENTS` — the initiative name to load.
    - What to pick up next
 5. Add `{name}` to `.active` if not already present.
 6. Patch each service's `CLAUDE.md` (see **Service Patching** below).
-7. `cd ~/workspace/initiative && git add . && git commit -m "chore: load {name}"`
 
 ---
 

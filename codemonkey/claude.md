@@ -83,7 +83,7 @@ DISCOVERY never conflicts.
 | Command | Behavior |
 |---|---|
 | `/codemonkey:start` | Intake loop — keep asking until type, goal, services, tickets, refs are solid. Warn on conflicts. Scaffold folder + CLAUDE.md. Update .active and INITIATIVES.md. Patch service CLAUDE.mds. Commit. |
-| `/codemonkey:load {name}` | Read initiative CLAUDE.md. Give briefing. Add to .active. Patch service CLAUDE.mds. Commit. |
+| `/codemonkey:load {name}` | Read initiative CLAUDE.md. Give briefing. Add to .active. Patch service CLAUDE.mds. |
 | `/codemonkey:list [--include-finished]` | Read INITIATIVES.md. Render status table. Hide finished by default. |
 | `/codemonkey:status {name}` | Deep read of initiative CLAUDE.md. Output: summary, open tasks, blockers, missing context, what's next. |
 | `/codemonkey:include [{name}]` | Prompt user for additional context. Append to dynamic section of current or named initiative. Commit. |
@@ -93,6 +93,5 @@ DISCOVERY never conflicts.
 
 Every write operation commits to the initiative git repo with a meaningful message:
 - `feat: initialize {name} ({type})`
-- `chore: load {name}`
 - `chore: sync {name} — {one-line summary}`
 - `chore: include context in {name}`
