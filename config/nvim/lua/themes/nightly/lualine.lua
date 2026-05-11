@@ -14,15 +14,15 @@ local theme = {
   },
 
   visual = {
-    a = { fg = p.color5, bg = p.background },
+    a = { fg = p.keyword, bg = p.background },
     b = { fg = p.foreground, bg = p.cursorline },
     c = { fg = p.foreground, bg = p.background },
   },
 
   inactive = {
-    a = { bg = p.none, fg = p.color17 },
-    b = { bg = p.none, fg = p.color17 },
-    c = { bg = p.none, fg = p.color17 },
+    a = { bg = p.none, fg = p.subtle },
+    b = { bg = p.none, fg = p.subtle },
+    c = { bg = p.none, fg = p.subtle },
   },
 }
 
