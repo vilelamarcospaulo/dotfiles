@@ -32,7 +32,7 @@ vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]], { desc = "decrease h
 vim.keymap.del('v', 'gc')
 
 local comment_fn = require('vim._comment').operator
-vim.keymap.set({ 'n', 'v' }, 'gcc', comment_fn, { expr = true, desc = 'Toggle comment line' })
+vim.keymap.set({ 'v' }, 'gcc', comment_fn, { expr = true, desc = 'Toggle comment line' })
 vim.keymap.set({ 'n', 'v' }, '<C-/>', 'gcc', { desc = "comment line", remap = true })
 
 -- Save current buffer

@@ -3,7 +3,7 @@ local M = {}
 M.dark_colors = {
   color0        = "#232A2D",
   color1        = "#E57474",
-  color2        = "#8CCF7E",
+  color2        = "#C8A97C",
   color3        = "#E5C76B",
   color4        = "#67B0E8",
   color5        = "#C47FD5",
@@ -21,14 +21,31 @@ M.dark_colors = {
   color17       = "#5A5D61",
   color18       = "#292E42",
   comment       = "#FFA700",
+  comment_muted = "#8b949e",
   black         = "#000000",
   light_bg      = "#202a2e",
-  background    = "#141B1E",
-  darker_bg     = "#101518",
+  background    = "#101114",
+  darker_bg     = "#0c0e10",
   foreground    = "#AEAEAE",
   foreground_hl = "#FFFFFF",
   cursorline    = "#242e32",
   none          = "NONE",
 }
+
+-- function get_hl(name)
+--   local ok, hl = pcall(vim.api.nvim_get_hl_by_name, name, true)
+--   if not ok then
+--     return
+--   end
+--   for _, key in pairs({ "foreground", "background", "special" }) do
+--     if hl[key] then
+--       hl[key] = string.format("#%06x", hl[key])
+--     end
+--   end
+--   return hl
+-- end
+--
+-- local normal = get_hl("Normal")
+-- for key, value in pairs(normal) do print(key .. value) end
 
 return M

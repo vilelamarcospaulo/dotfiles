@@ -1,26 +1,28 @@
+local p = require("themes.nightly.palete").dark_colors
+
 local theme = {
   normal = {
-    a = { fg = '#AEAEAE', bg = '#242E32' },
-    b = { fg = '#AEAEAE', bg = '#242E32' },
-    c = { fg = '#AEAEAE', bg = '#101518' },
+    a = { fg = p.foreground, bg = p.cursorline },
+    b = { fg = p.foreground, bg = p.cursorline },
+    c = { fg = p.foreground, bg = p.background },
   },
 
   insert = {
-    a = { fg = "#FFA700", bg = '#101518' },
-    b = { fg = '#AEAEAE', bg = '#242E32' },
-    c = { fg = '#AEAEAE', bg = '#101518' },
+    a = { fg = p.comment, bg = p.background },
+    b = { fg = p.foreground, bg = p.cursorline },
+    c = { fg = p.foreground, bg = p.background },
   },
 
   visual = {
-    a = { fg = "#C678DD", bg = '#101518' },
-    b = { fg = '#AEAEAE', bg = '#242E32' },
-    c = { fg = '#AEAEAE', bg = '#101518' },
+    a = { fg = p.color5, bg = p.background },
+    b = { fg = p.foreground, bg = p.cursorline },
+    c = { fg = p.foreground, bg = p.background },
   },
 
   inactive = {
-    a = { bg = 'NONE', fg = '#5A5D61' },
-    b = { bg = 'NONE', fg = '#5A5D61' },
-    c = { bg = 'NONE', fg = '#5A5D61' },
+    a = { bg = p.none, fg = p.color17 },
+    b = { bg = p.none, fg = p.color17 },
+    c = { bg = p.none, fg = p.color17 },
   },
 }
 
