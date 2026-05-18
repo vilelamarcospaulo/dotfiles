@@ -7,8 +7,17 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "exit terminal mode" })
 vim.keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "select all" })
 vim.keymap.set('n', '<leader>rr', ':%s//g<Left><Left>', { noremap = true, silent = false, desc = "search and replace" })
 
--- json formatter
-vim.keymap.set("n", "<localleader>jf", "<cmd>%!jq .<CR>", { desc = "format json" })
+-- buffer formatters
+vim.keymap.set("n", "<localleader>jf", function()
+  local ft = vim.bo.filetype
+  if ft == "json" then
+    vim.cmd("%!jq .")
+  elseif ft == "clojure" or ft == "edn" then
+    vim.cmd("%!jet --pretty")
+  else
+    vim.notify("No formatter for filetype: " .. ft, vim.log.levels.WARN)
+  end
+end, { desc = "format json/edn" })
 
 -- Split window
 vim.keymap.set("n", "ss", "<cmd>split<CR>", { desc = "split horizontal" })
