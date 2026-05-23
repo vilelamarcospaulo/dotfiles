@@ -27,3 +27,6 @@ eval "$(starship init zsh)"
 
 ### atuin 
 eval "$(atuin init zsh --disable-up-arrow)"
+
+### don't sleep on close
+alias keep_awake="sudo sh -c \"pmset -a disablesleep 1; trap 'pmset -a disablesleep 0; echo Sleep re-enabled' EXIT INT TERM; echo 'Sleep disabled for 3600 seconds...'; sleep 3600\""
