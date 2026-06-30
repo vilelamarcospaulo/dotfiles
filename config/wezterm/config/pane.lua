@@ -6,8 +6,8 @@ return {
     brightness = 0.5,
   },
   keys = {
-    { key = '\\', mods = 'CMD',     action = wezterm.action.SplitPane { direction = 'Right' } },
-    { key = '\\', mods = 'CMD|ALT', action = wezterm.action.SplitPane { direction = 'Down' } },
+    { key = '\\', mods = 'CMD',     action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' } },
+    { key = '\\', mods = 'CMD|ALT', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' } },
     { key = 'w',  mods = 'CMD',     action = wezterm.action.CloseCurrentPane { confirm = false }, },
 
     -- Pane navigation with vim-style keys (CTRL+h/j/k/l)
