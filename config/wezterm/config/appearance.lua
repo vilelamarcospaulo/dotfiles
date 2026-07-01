@@ -27,6 +27,15 @@ local function create_tab_title(tab, tabs, panes, config, hover, max_width)
   -- Normalize to use /
   path = path:gsub("\\", "/")
 
+  -- Agents (e.g. Claude Code) already set a rich OSC title: "<status glyph> <summary>".
+  -- Show that verbatim instead of process|cwd so the tab reflects the task + state.
+  if process == "claude" then
+    local osc = tab.active_pane.title
+    if osc and #osc > 0 then
+      return osc
+    end
+  end
+
   if process == "zsh" then
     return { process = '', path = path }
   else
@@ -48,14 +57,19 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
     box_bg, text_fg = '#3c3836', '#928374'
   end
 
-  -- Label: window index (like tmux) + process + relative path.
-  local label = tostring(tab.tab_index + 1)
-  label = label .. ':'
-  if title.process ~= '' then
-    label = label .. ' ' .. title.process
-  end
-  if title.path ~= '' then
-    label = label .. (title.process ~= '' and (' ' .. THIN_VERTICAL .. ' ') or ' ') .. title.path
+  -- Label: window index (like tmux) + either an agent/manual title string,
+  -- or the process | relative-path pair for shells and editors.
+  local label = tostring(tab.tab_index + 1) .. ':'
+  if type(title) == 'string' then
+    -- agent summary (Claude sets "<status glyph> <summary>") or a manual panetitle
+    label = label .. ' ' .. title
+  else
+    if title.process ~= '' then
+      label = label .. ' ' .. title.process
+    end
+    if title.path ~= '' then
+      label = label .. (title.process ~= '' and (' ' .. THIN_VERTICAL .. ' ') or ' ') .. title.path
+    end
   end
 
   local elements = {}
