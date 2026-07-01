@@ -1,11 +1,32 @@
+# The OSC title we emit here is the single source of truth for the WezTerm tab
+# label (see config/wezterm/config/appearance.lua): it's the only per-pane signal
+# that stays fresh for background/unfocused tabs. At the prompt we show just the
+# directory; while a command runs we show "<command> ▕ <dir>".
+#
+# The "running" title is deferred by TITLE_DELAY seconds via a background timer:
+# a fast command (ls, cd, git status) finishes before the timer fires, precmd
+# cancels it, and the title never flips — so no blink. Only commands that run
+# longer than the delay actually swap the title to "<command> ▕ <dir>".
+TITLE_DELAY=0.3
+typeset -g _title_timer_pid=""
+
 function set_title_precmd () {
-  str=$(echo $PWD | sed 's/.*\///')
-  echo -ne "\033]0;$str\007"
+  # cancel a still-pending "running" title before it can fire
+  [[ -n "$_title_timer_pid" ]] && kill "$_title_timer_pid" 2>/dev/null
+  _title_timer_pid=""
+  local dir=${PWD##*/}
+  echo -ne "\033]0;$dir\007"
 }
+
 function set_title_preexec () {
-  str=$(echo $PWD | sed 's/.*\///')
-  echo -ne "\033]0;$1 | $str\007"
+  local dir=${PWD##*/}
+  local cmd=${1%% *}   # first word of the command line
+  cmd=${cmd##*/}       # strip any leading path (e.g. /usr/bin/ping -> ping)
+  # defer the title swap; &! backgrounds and disowns (no job-control noise)
+  { sleep "$TITLE_DELAY"; echo -ne "\033]0;$cmd ▕ $dir\007" } &!
+  _title_timer_pid=$!
 }
+
 if [ -n "$ZSH_VERSION" ]; then
   DISABLE_AUTO_TITLE="true"
   precmd_functions+=(set_title_precmd)

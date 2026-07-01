@@ -6,70 +6,46 @@ local SCHEME = 'Guezwhoz'
 local _scheme = wezterm.color.get_builtin_schemes()[SCHEME]
 local bar_bg = _scheme and _scheme.background
 
--- selene: allow(unused_variable) @diagnostic disable-next-line: unused-local
-local function create_tab_title(tab, tabs, panes, config, hover, max_width)
+-- Cap the title at this width so a long title can't blow the tab out. Shorter
+-- titles keep their natural size; only over-long ones get an ellipsis.
+local MAX_TITLE_WIDTH = 100
+
+local function fit_title(title)
+  if wezterm.column_width(title) > MAX_TITLE_WIDTH then
+    title = wezterm.truncate_right(title, MAX_TITLE_WIDTH - 1) .. '…'
+  end
+  return title
+end
+
+-- Build the tab's label as a single string. Precedence:
+--   1. manual panetitle (user_var), if set via `wezterm cli set-tab-title` etc.
+--   2. the pane's OSC title.
+
+local function create_tab_title(tab)
   local user_title = tab.active_pane.user_vars.panetitle
   if user_title ~= nil and #user_title > 0 then
     return user_title
   end
 
-  local process = tab.active_pane.foreground_process_name or ''
-  process = process:match('([^/\\]+)$') or process
-
-  local cwd = tab.active_pane.current_working_dir
-  local path = (cwd and cwd.file_path) or ''
-  -- Convert absolute path to relative with ~ for home
-  --
-  local home = os.getenv("HOME")
-  if home and path:sub(1, #home) == home then
-    path = "~" .. path:sub(#home + 1)
-  end
-  -- Normalize to use /
-  path = path:gsub("\\", "/")
-
-  -- Agents (e.g. Claude Code) already set a rich OSC title: "<status glyph> <summary>".
-  -- Show that verbatim instead of process|cwd so the tab reflects the task + state.
-  if process == "claude" then
-    local osc = tab.active_pane.title
-    if osc and #osc > 0 then
-      return osc
-    end
-  end
-
-  if process == "zsh" then
-    return { process = '', path = path }
-  else
-    return { process = process, path = path }
-  end
+  return tab.active_pane.title or ''
 end
 
 wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
-  local title = create_tab_title(tab, tabs, panes, config, hover, max_width)
-
-  local THIN_VERTICAL = utf8.char(0x2595) -- ▕ thin vertical bar (process | path separator)
+  local title = create_tab_title(tab)
 
   -- Each tab is a square filled box; active is a muted orange, inactive a dim grey.
   local box_bg, text_fg
   if tab.is_active then
-    -- box_bg, text_fg = bar_bg, '#ffba66'
-    box_bg, text_fg = bar_bg, '#ffffff'
+    box_bg, text_fg = bar_bg, '#ffba66'
+    -- box_bg, text_fg = bar_bg, '#ffffff'
   else
     box_bg, text_fg = '#3c3836', '#928374'
   end
 
-  -- Label: window index (like tmux) + either an agent/manual title string,
-  -- or the process | relative-path pair for shells and editors.
+  -- Label: window index (like tmux) + the title, capped to a max width.
   local label = tostring(tab.tab_index + 1) .. ':'
-  if type(title) == 'string' then
-    -- agent summary (Claude sets "<status glyph> <summary>") or a manual panetitle
-    label = label .. ' ' .. title
-  else
-    if title.process ~= '' then
-      label = label .. ' ' .. title.process
-    end
-    if title.path ~= '' then
-      label = label .. (title.process ~= '' and (' ' .. THIN_VERTICAL .. ' ') or ' ') .. title.path
-    end
+  if #title > 0 then
+    label = label .. ' ' .. fit_title(title)
   end
 
   local elements = {}
@@ -89,6 +65,17 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
   table.insert(elements, { Text = ' ' .. label .. ' ' })
 
   return elements
+end)
+
+-- format-tab-title only re-runs when the tab bar is repainted. An *unfocused* tab
+-- has no activity of its own to drive that repaint (the active tab does, via its
+-- output), so it only refreshes on the status_update_interval tick below — at the
+-- 1000ms default an animated OSC title (Claude Code's working spinner) gets sampled
+-- once a second and looks frozen while the active tab animates. Setting a status
+-- invalidates the tab-bar region, forcing format-tab-title to re-run for all tabs
+-- with fresh PaneInformation. The empty right status is just the repaint trigger.
+wezterm.on('update-status', function(window, _pane)
+  window:set_right_status('')
 end)
 
 local config = {
