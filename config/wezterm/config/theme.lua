@@ -7,5 +7,5 @@
 -- config.color_scheme = 'Guezwhoz'
 
 return {
-  color_scheme = 'Gruvbox dark, hard (base16)',
+  color_scheme = 'Guezwhoz',
 }

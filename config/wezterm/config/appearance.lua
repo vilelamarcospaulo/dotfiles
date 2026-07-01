@@ -1,5 +1,11 @@
 local wezterm = require('wezterm')
 
+-- Tab bar / gap background = the active color scheme's terminal background, so
+-- the bar blends with the panes. Keep SCHEME in sync with theme.lua.
+local SCHEME = 'Guezwhoz'
+local _scheme = wezterm.color.get_builtin_schemes()[SCHEME]
+local bar_bg = _scheme and _scheme.background
+
 -- selene: allow(unused_variable) @diagnostic disable-next-line: unused-local
 local function create_tab_title(tab, tabs, panes, config, hover, max_width)
   local user_title = tab.active_pane.user_vars.panetitle
@@ -31,52 +37,44 @@ end
 wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
   local title = create_tab_title(tab, tabs, panes, config, hover, max_width)
 
-  local is_first_tab = tab.tab_index == 0
-  local is_last_tab = tab.tab_index == #tabs - 1
+  local THIN_VERTICAL = utf8.char(0x2595) -- ▕ thin vertical bar (process | path separator)
 
-  local SOLID_LEFT_ARROW = utf8.char(0xe0ba)
-  local SOLID_RIGHT_ARROW = utf8.char(0xe0bc)
-
-  local THIN_VERTICAL = utf8.char(0x2595) -- ▕ Thin vertical bar
-
-  local background = '#121212'
-  local foreground = '#606060'
-
+  -- Each tab is a square filled box; active is a muted orange, inactive a dim grey.
+  local box_bg, text_fg
   if tab.is_active then
-    background = '#121212'
-    foreground = '#FFFFFF'
+    -- box_bg, text_fg = bar_bg, '#ffba66'
+    box_bg, text_fg = bar_bg, '#ffffff'
+  else
+    box_bg, text_fg = '#3c3836', '#928374'
   end
 
-  local edge_background = "#333333"
-  local edge_foreground = background
-
-  local tab_title = {}
-  if not is_first_tab then
-    table.insert(tab_title, { Attribute = { Intensity = "Bold" } })
-    table.insert(tab_title, { Background = { Color = edge_background } })
-    table.insert(tab_title, { Foreground = { Color = edge_foreground } })
-    table.insert(tab_title, { Text = SOLID_LEFT_ARROW })
+  -- Label: window index (like tmux) + process + relative path.
+  local label = tostring(tab.tab_index + 1)
+  label = label .. ':'
+  if title.process ~= '' then
+    label = label .. ' ' .. title.process
+  end
+  if title.path ~= '' then
+    label = label .. (title.process ~= '' and (' ' .. THIN_VERTICAL .. ' ') or ' ') .. title.path
   end
 
-  table.insert(tab_title, { Attribute = { Intensity = 'Bold' } })
-  table.insert(tab_title, { Background = { Color = background } })
-  table.insert(tab_title, { Foreground = { Color = foreground } })
-  table.insert(tab_title, { Text = ' ' .. title.process })
+  local elements = {}
 
-  table.insert(tab_title, { Foreground = { Color = foreground } })
-  table.insert(tab_title, { Text = (title.process ~= '' and title.path ~= '' and (' ' .. THIN_VERTICAL .. ' ') or '') })
-  table.insert(tab_title, { Attribute = { Intensity = 'Normal' } })
-  table.insert(tab_title, { Foreground = { Color = foreground } })
-  table.insert(tab_title, { Text = title.path .. ' ' })
-
-  if not is_last_tab then
-    table.insert(tab_title, { Attribute = { Intensity = "Bold" } })
-    table.insert(tab_title, { Background = { Color = edge_background } })
-    table.insert(tab_title, { Foreground = { Color = edge_foreground } })
-    table.insert(tab_title, { Text = SOLID_RIGHT_ARROW })
+  -- gap before every box except the first, so tabs are spaced without a
+  -- stray gap at the left edge
+  if tab.tab_index > 0 then
+    table.insert(elements, { Background = { Color = bar_bg } })
+    table.insert(elements, { Foreground = { Color = bar_bg } })
+    table.insert(elements, { Text = '  ' })
   end
 
-  return tab_title
+  -- square box body
+  table.insert(elements, { Attribute = { Intensity = tab.is_active and 'Bold' or 'Normal' } })
+  table.insert(elements, { Background = { Color = box_bg } })
+  table.insert(elements, { Foreground = { Color = text_fg } })
+  table.insert(elements, { Text = ' ' .. label .. ' ' })
+
+  return elements
 end)
 
 local config = {
@@ -85,6 +83,12 @@ local config = {
 
   use_fancy_tab_bar = false, -- Disable native separators
   tab_max_width = 100,
+
+  colors = {
+    tab_bar = {
+      background = bar_bg, -- empty bar + gaps match the terminal background
+    },
+  },
 
   enable_scroll_bar = true,
   window_decorations = 'RESIZE | MACOS_FORCE_SQUARE_CORNERS',
