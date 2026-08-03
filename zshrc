@@ -46,8 +46,14 @@ source $ZSH/oh-my-zsh.sh
 ### startship
 eval "$(starship init zsh)"
 
-### atuin 
+### atuin
+[ -s "$HOME/.atuin/bin/env" ] && . "$HOME/.atuin/bin/env"
 eval "$(atuin init zsh --disable-up-arrow)"
+
+export PATH="$HOME/.local/bin:$PATH"
 
 ### don't sleep on close
 alias keep_awake="sudo sh -c \"pmset -a disablesleep 1; trap 'pmset -a disablesleep 0; echo Sleep re-enabled' EXIT INT TERM; echo 'Sleep disabled for 3600 seconds...'; sleep 3600\""
+
+### machine-local (nvm, pnpm, work paths) — created by init.sh, never tracked
+[ -f "$HOME/.zshrc.local" ] && . "$HOME/.zshrc.local"

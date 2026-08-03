@@ -1,3 +1,7 @@
+# identity lives here, not in the repo — created by init.sh
+[include]
+	path = ~/.gitconfig.local
+
 [alias]
   sync = "!git branch | grep -o 'main\\|master' | xargs -I % echo 'git checkout % && git pull origin %' | sh"
   clear = "!git branch | egrep -v '(^\\*|master|main)' | xargs git branch -D"
