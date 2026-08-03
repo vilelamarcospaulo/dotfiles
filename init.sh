@@ -43,41 +43,27 @@ done
 	email =
 EOF
 
-if ! command -v nvim >/dev/null; then
-  echo "Installing Neovim..."
-  brew install neovim
+if ! command -v brew >/dev/null; then
+  echo "Installing Homebrew..."
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-if ! command -v wezterm >/dev/null; then
-  # nightly, not stable: the stable cask is years behind and this config
-  # is written against nightly.
-  echo "Installing WezTerm..."
-  brew install --cask wezterm@nightly
-fi
+# Each package declares its own deps in a Brewfile next to its config; the
+# root Brewfile holds what no single package owns. Adding a package means
+# adding its Brewfile, not editing this script.
+# --no-upgrade so a setup run never turns into a surprise system upgrade.
+find "$DOTFILES" -name Brewfile -not -path '*/.git/*' | while read -r bf; do
+  echo "Installing deps from ${bf#"$DOTFILES"/}"
+  # </dev/null: brew bundle reads stdin and would otherwise swallow the rest
+  # of find's output, silently installing only the first Brewfile.
+  brew bundle install --no-upgrade --file="$bf" </dev/null
+done
 
-if ! command -v starship >/dev/null; then
-  echo "Installing Starship..."
-  brew install starship
-fi
-
-if ! command -v bat >/dev/null; then
-  echo "Installing bat..."
-  brew install bat
-fi
-
+# oh-my-zsh is the one dep brew can't provide.
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   echo "Installing oh-my-zsh..."
   RUNZSH=no KEEP_ZSHRC=yes CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-fi
-
-if ! command -v atuin >/dev/null; then
-  echo "Installing Atuin..."
-  curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
-fi
-
-if ! command -v aerospace >/dev/null; then
-  echo "Installing AeroSpace..."
-  brew install nikitabobko/tap/aerospace
 fi
 
 echo "Setup complete. Machine-local overrides: ~/.zshrc.local, ~/.gitconfig.local"

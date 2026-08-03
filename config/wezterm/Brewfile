@@ -1,0 +1,7 @@
+# nightly, not stable: the stable cask is years behind and this config is
+# written against nightly.
+cask "wezterm@nightly"
+
+# fonts named in config/font.lua
+cask "font-jetbrains-mono"
+cask "font-meslo-lg-nerd-font"
