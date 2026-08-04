@@ -8,7 +8,7 @@ brew "fd"
 
 # nvim-treesitter (main branch) shells out to this to build parsers —
 # without it, parser install fails with "no such file or directory 'tree-sitter'".
-brew "tree-sitter"
+brew "tree-sitter-cli"
 
 # language servers enabled in lua/core/lsp/init.lua — nvim has no mason, so
 # every server here must exist on $PATH or it fails silently.
