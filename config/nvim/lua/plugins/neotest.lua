@@ -8,12 +8,18 @@ return {
 
     -- Vitest adapter
     "marilari88/neotest-vitest",
+    -- RSpec adapter
+    "olimorris/neotest-rspec",
+    -- Kotlin (Gradle) adapter
+    "codymikol/neotest-kotlin",
   },
   config = function()
     local neotest = require("neotest")
 
     neotest.setup({
       adapters = {
+        require("neotest-rspec"),
+        require("neotest-kotlin"),
         require("neotest-vitest")({
           -- Filter directories when searching for test files
           filter_dir = function(name, rel_path, root)

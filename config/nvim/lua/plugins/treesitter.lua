@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "lua", "c", "markdown", "go", "clojure", "ruby", "python" },
+  pattern = { "lua", "c", "markdown", "go", "clojure", "ruby", "python", "kotlin" },
   callback = function()
     vim.treesitter.start()
   end,

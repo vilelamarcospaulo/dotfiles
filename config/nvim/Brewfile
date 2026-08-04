@@ -8,7 +8,8 @@ brew "fd"
 
 # language servers enabled in lua/core/lsp/init.lua — nvim has no mason, so
 # every server here must exist on $PATH or it fails silently.
-brew "lua-language-server"   # lua_ls
-brew "pyright"               # pyright
-brew "ruby-lsp"              # ruby-lsp
-brew "vtsls"                 # vtsls
+brew "lua-language-server"        # lua_ls
+brew "pyright"                    # pyright
+brew "ruby-lsp"                   # ruby_lsp
+brew "vtsls"                      # vtsls
+brew "kotlin-language-server"     # kotlin_language_server
