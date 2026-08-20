@@ -34,7 +34,11 @@ return {
     vim.keymap.set('n', '<leader>fr', fzf.oldfiles, { desc = "recent files" })
 
     vim.keymap.set('n', '<leader>fw', fzf.live_grep, { desc = "grep" })
-    vim.keymap.set('n', '<C-f>', fzf.live_grep, { desc = "grep" })
+    -- code-only grep: skip openspec/ (and other spec dirs) noise
+    vim.keymap.set('n', '<C-f>', function()
+      local rg_opts = fzf.config.globals.grep.rg_opts:gsub(" %-e$", " --glob=!openspec/** -e")
+      fzf.live_grep({ rg_opts = rg_opts })
+    end, { desc = "grep (no specs)" })
 
     vim.keymap.set('n', '<leader>ht', fzf.colorschemes, { desc = "pick colorscheme" })
     vim.keymap.set("n", "<leader>bb", fzf.buffers, { desc = "list buffers" })
