@@ -57,3 +57,5 @@ alias keep_awake="sudo sh -c \"pmset -a disablesleep 1; trap 'pmset -a disablesl
 
 ### machine-local (nvm, pnpm, work paths) — created by init.sh, never tracked
 [ -f "$HOME/.zshrc.local" ] && . "$HOME/.zshrc.local"
+
+alias gw="git gtr"
