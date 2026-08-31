@@ -10,6 +10,10 @@ return Config:init()
         -- clear also viewport (by default only the scrollback)
         { key = 'k',          mods = 'CMD',      action = wezterm.action.ClearScrollback 'ScrollbackAndViewport' },
 
+        -- AI CLIs: make Shift+Enter send Ctrl+J/LF for multiline prompts
+        -- in Codex, opencode, and Cursor CLI.
+        { key = 'Enter',      mods = 'SHIFT',    action = wezterm.action.SendString '\x0a' },
+
         -- CMD+Right to End
         { key = 'RightArrow', mods = 'CMD',      action = wezterm.action.SendKey { key = 'End' } },
 
