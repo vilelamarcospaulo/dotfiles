@@ -35,6 +35,12 @@ return {
     { key = 'k',     mods = 'CTRL',     action = wezterm.action.ActivatePaneDirection 'Up' },
     { key = 'l',     mods = 'CTRL',     action = wezterm.action.ActivatePaneDirection 'Right' },
 
+    -- Pane reorganization: pick a labeled pane to swap with the active one.
+    -- Keep focus on the process being moved, matching AeroSpace's move behavior.
+    { key = 's',     mods = 'CTRL|SHIFT', action = wezterm.action.PaneSelect { mode = 'SwapWithActiveKeepFocus' } },
+    { key = 'j',     mods = 'CTRL|SHIFT', action = wezterm.action.RotatePanes 'CounterClockwise' },
+    { key = 'k',     mods = 'CTRL|SHIFT', action = wezterm.action.RotatePanes 'Clockwise' },
+
     -- Pane resize (CTRL for width, +ALT for height) — CMD is now free for font size
     { key = '-',     mods = 'CTRL',     action = wezterm.action.AdjustPaneSize { 'Left', 5 } },
     { key = '=',     mods = 'CTRL',     action = wezterm.action.AdjustPaneSize { 'Right', 5 } },
